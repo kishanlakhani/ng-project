@@ -1,0 +1,10 @@
+<input type="text" class="form-control" [(ngModel)]="inputDefaultValue" (input)="stockValueChange($event)">
+<label class=" mt-2 text-dark" for="" [innerHTML]="stockStatus" [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }">
+</label>
+
+<button type="button" name="" id=""
+    class="btn-block btn-danger btn-lg mt-2" 
+    (click)="onClickDel(productItem.id)"
+    >
+    Delete
+</button>

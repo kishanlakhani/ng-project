@@ -1,0 +1,80 @@
+    
+  <div class="container">
+
+    <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" 
+                 class="form-control" 
+                 placeholder="Enter Title"
+                 formControlName="title"
+                 >
+        </div>
+        <div class="alert alert-danger mt-2" 
+                   role="alert"
+                   *ngIf="addProductForm.get('title').errors?.required && addProductForm.get('title').touched">
+                 Title is required
+            </div>
+            <!-- <div class="alert alert-danger mt-2" 
+                   role="alert"
+                   *ngIf="passwor.errors?.minlength && !password.pristine">
+                 password length is greater then 8 character
+            </div> -->
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" 
+                 class="form-control" 
+                 placeholder="Price"
+                 formControlName="price"
+          >
+        </div>
+        <div class="alert alert-danger mt-2" 
+                   role="alert"
+                   *ngIf="addProductForm.get('price').errors?.required && addProductForm.get('price').touched">
+                 Price is required
+        </div>   
+        <div class="alert alert-danger mt-2" 
+                   role="alert"
+                   *ngIf="addProductForm.get('price').errors?.min && !addProductForm.get('price').pristine">
+                   price is only positive
+        </div>
+        <div class="form-group">
+            <label for="stock">Stock</label>
+            <input type="number" 
+                   class="form-control" 
+                   placeholder="Stock"
+                   formControlName="stock"
+                   >
+          </div>
+          <div class="alert alert-danger mt-2" 
+          role="alert"
+          *ngIf="addProductForm.get('stock').errors?.required && addProductForm.get('stock').touched">
+        stock is required
+    </div>
+    <div class="alert alert-danger mt-2" 
+    role="alert"
+    *ngIf="addProductForm.get('stock').errors?.min && !addProductForm.get('stock').pristine">
+    stock is only positive
+    </div>
+        <button type="submit"  
+                class="btn btn-block btn-primary"
+                [disabled]="!addProductForm.valid"
+                >Submit</button>
+    
+        <button type="button"  
+                class="btn btn-primary btn-block mt-2"
+                (click)="addProductForm.reset()"
+                >Reset</button>
+    
+        <button type="button" 
+                class="btn btn-primary btn-block mt-2 mb-5"
+                (click)="onGoBack()"
+                >Go Back</button>        
+      </form>
+    
+    </div>
+    
+      <!-- <button type="button" 
+            class="btn btn-primary btn-lg btn-block mb-5"
+            (click)="onClick()" 
+            >Add Product To Tabel</button> -->
