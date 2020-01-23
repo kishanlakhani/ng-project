@@ -37,8 +37,7 @@ export class SignUpComponent implements OnInit {
 
   onCheckChange(event) {
     const checkArray: FormArray = this.signUpForm.get('checkArray') as FormArray;
-    console.log(checkArray);
-    console.log(checkArray.controls);
+    // console.log(checkArray.controls);
     if (event.target.checked) {
       checkArray.push(new FormControl(event.target.value));
     } else {

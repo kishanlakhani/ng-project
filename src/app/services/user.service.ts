@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SIGNUPIN } from '../mock-data/user-data';
-import { ISignIn } from '../models/user.interface';
+import { ISignIn } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'

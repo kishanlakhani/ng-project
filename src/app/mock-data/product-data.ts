@@ -1,4 +1,4 @@
-import { IProductData } from '../models/prouct.interface';
+import { IProductData } from '../models/prouct.model';
 
 export const PRODUCTLIST:IProductData[] = [
     {id:1,title:"20 Microns Limited",price:42,stock:5},

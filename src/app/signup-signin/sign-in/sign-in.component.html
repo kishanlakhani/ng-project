@@ -20,10 +20,7 @@
                       name="email"
                       formControlName="email"
                       >
-                      <div class="alert alert-danger" role="alert">
-                          <strong></strong>
-                      </div>
-  
+                     
                       <div class="alert alert-danger mt-2" 
                           role="alert"
                           *ngIf="signInForm.get('email').errors?.required && signInForm.get('email').touched">
@@ -34,27 +31,26 @@
                           *ngIf="signInForm.get('email').errors?.email && !signInForm.get('email').pristine">
                           please enter valid Email form
                       </div>
-                      <div class="alert alert-danger mt-2" 
+                      
+                     <div class="alert alert-danger mt-2"  
                           role="alert"
-                          *ngIf="signInForm.get('email').errors?.email && !signInForm.get('email').pristine">
-                          please enter valid Email form
-                      </div>
-                      <div class="alert alert-danger mt-2" 
-                          role="alert"
-                          *ngIf="signInForm.get('email').errors?.validateEmailNotTaken && !signInForm.get('email').pristine">
-                          please enter valid Email form
-                      </div>
+                          *ngIf="signInForm.get('email').errors?.checkMailValid && !signInForm.get('email').pristine">
+                          email not match
+                      </div> 
                   </div>
-                  <button 
+                  <button type="button"
                           class="btn btn-primary"
-                          (click)="next()">Next</button>
+                          (click)="next()" 
+                          *ngIf="isEmailShow"
+                          >Next</button>
+
                   <div class="form-group" *ngIf="isPasswordShow">
                       <label for="">Password</label>
                       <input type="password"
                         class="form-control" 
                         name="password"
                         formControlName="password"
-                        >
+                      >
                         <div 
                           *ngIf="isEmailShow"
                           class="alert alert-danger" role="alert">
@@ -64,9 +60,16 @@
                       </div>
                     </div>
                     
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"
+                  *ngIf="!isEmailShow"
+                  >Sign in</button>
                   <hr class="my-4">
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign Up</button>
+                  <button 
+                    class="btn btn-lg btn-primary btn-block text-uppercase" 
+                    type="button"
+                    [routerLink]="['/signup']" routerLinkActive="router-link-active" 
+                  
+                  >Sign Up</button>
                   <hr class="my-4">
                 </form>
               </div>

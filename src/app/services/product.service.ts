@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {PRODUCTLIST} from '../mock-data/product-data';
-import { IProductData } from '../models/prouct.interface';
+import { IProductData } from '../models/prouct.model';
 
 @Injectable({
   providedIn: 'root'

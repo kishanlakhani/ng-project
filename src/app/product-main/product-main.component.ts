@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProductData } from '../models/prouct.interface';
+import { IProductData } from '../models/prouct.model';
 
 @Component({
   selector: 'app-product-main',

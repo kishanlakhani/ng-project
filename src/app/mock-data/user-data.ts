@@ -1,4 +1,4 @@
-import { ISignIn } from '../models/user.interface';
+import { ISignIn } from '../models/user.model';
 
 export const SIGNUPIN:ISignIn[] = [
     {

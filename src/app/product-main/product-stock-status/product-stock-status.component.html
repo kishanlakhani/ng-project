@@ -1,4 +1,20 @@
-<input type="text" class="form-control" [(ngModel)]="inputDefaultValue" (input)="stockValueChange($event)">
+<input type="text" 
+        class="form-control" 
+        [(ngModel)]="inputDefaultValue" 
+        (input)="stockValueChange($event)"
+        #stock="ngModel"
+        required
+        >
+<div class="alert alert-danger mt-2" 
+        role="alert"
+        *ngIf="stock.errors?.required && stock.touched">
+      stock is required
+</div>  
+<div class="alert alert-danger mt-2" 
+                   role="alert"
+                   *ngIf="stock.errors?.min && !stock.pristine">
+                   stock is more the zero
+</div>
 <label class=" mt-2 text-dark" for="" [innerHTML]="stockStatus" [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }">
 </label>
 
