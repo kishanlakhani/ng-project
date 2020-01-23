@@ -1,11 +1,11 @@
 <app-product-detail (sendProductData)="getProductData($event)"></app-product-detail>
-<button type="button" 
+<a 
         class="btn btn-primary btn-block btn-lg mb-5" 
-        (click)="isAddProduct=true;"
-        *ngIf="!isAddProduct"
+        [routerLink]="['add']" routerLinkActive="router-link-active" 
         >Add Product
-</button>
-
+</a>
+<!-- (click)="isAddProduct=true;"
+*ngIf="!isAddProduct" -->
 <app-product-add 
         *ngIf="isAddProduct" 
         (isAddProduct)="isAddProductChange($event)">

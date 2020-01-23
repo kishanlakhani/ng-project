@@ -8,7 +8,7 @@ import { IProductData } from '../models/prouct.model';
 export class ProductService {
   productLists:IProductData[] = PRODUCTLIST ;
   i:number = 11;
-  id;
+  id:number;
   constructor() { }
 
   getTotalPrice(){
@@ -31,6 +31,14 @@ export class ProductService {
       stock
     });
     this.getProductList();
+  }
+
+  updateProduct({id,title,price,stock}){
+    this.id=this.productLists.findIndex(product=>product.id===id)
+    this.productLists[this.id].id=id;
+    this.productLists[this.id].title=title;
+    this.productLists[this.id].price=price;
+    this.productLists[this.id].stock=stock;
   }
 
   delProduct(id1){

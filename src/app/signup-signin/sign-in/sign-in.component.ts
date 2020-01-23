@@ -3,7 +3,6 @@ import { SignUpInService } from '../../services/user.service';
 import  { ISignIn } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { type } from 'os';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -32,8 +31,6 @@ export class SignInComponent implements OnInit {
   }
 
   next(){
-    // console.log(this.signInService.checkEmail(this.signInForm.controls.email.value));
-    // this.isPasswordShow =this.signInService.checkEmail(this.signInForm.controls.email.value);
     console.log(typeof this.signList.findIndex(sign=>sign.email===this.signInForm.controls.email.value));
     console.log(this.signList.findIndex(sign=>sign.email===this.signInForm.controls.email.value));
     if(this.signList.findIndex(sign=>sign.email===this.signInForm.controls.email.value) !== -1){
@@ -48,15 +45,15 @@ export class SignInComponent implements OnInit {
       this.isEmailShow = !this.isPasswordShow;
       return true;
     }
-   
-
-    // this.isPasswordShow =this.signInService.checkEmail(this.signInForm.controls.email.value);
-    // this.validateEmailNotTaken(c);
   }
   onFormSubmit(){
     console.log(this.signInForm);
+    let password = this.signInForm.controls.password.value;
+    if(this.signList.findIndex(list=>list.password===password) !== -1){
+      this.router.navigate(['product']);
+
+    }
     
-    this.router.navigate(['product']);
     
   }
 

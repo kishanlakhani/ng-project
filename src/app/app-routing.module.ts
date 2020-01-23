@@ -7,23 +7,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProductMainComponent } from './product-main/product-main.component';
 
-
-const routes: Routes = [
- 
-  {
-    path:'home',component:HomeComponent
-  },
-   {
-    path:'', redirectTo:'/home',pathMatch:'full'
-  },
-{
-    path:'auth',
-    loadChildren:()=>import('./signup-signin/signup-signin.module').then(sub=>sub.SignupSigninModule)
+const routes: Routes = [ 
+  { path:'home',component:HomeComponent },
+  { path:'', redirectTo:'/home',pathMatch:'full'},
+  { path:'',loadChildren:()=>import('./signup-signin/signup-signin.module').then(sub=>sub.SignupSigninModule)
     // loadChildren:'./signup-signin/signup-signin.module#SignupSigninModule'
   },
-  {
-    path:'**',component: PageNotFoundComponent  
-  }
+  { path:'product',loadChildren:()=>import('./product-main/product-main.module').then(sub=>sub.ProductMainModule) },
+  { path:'**',component: PageNotFoundComponent  }
 ];
 
 @NgModule({

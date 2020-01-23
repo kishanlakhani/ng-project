@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output,EventEmitter, SimpleChanges } from '@angular/core';
 import { IProductData } from '../../models/prouct.model';
 import { ProductService } from '../../services/product.service';
+import { SignInComponent } from 'src/app/signup-signin/sign-in/sign-in.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-stock-status',
@@ -13,7 +15,7 @@ export class ProductStockStatusComponent implements OnInit {
   stockStatus:string = "high";
   stockValue:number=0;
   inputDefaultValue:string=""
-  constructor(private  productService:ProductService) { }
+  constructor(private  productService:ProductService,router:Router) { }
 
   ngOnInit() {
   }
@@ -27,18 +29,24 @@ export class ProductStockStatusComponent implements OnInit {
   stockValueChange(event){
     console.log(this.inputDefaultValue)
     if(!isNaN(Number(this.inputDefaultValue))){
-      this.productItem.stock = Number(this.inputDefaultValue);
-      this.stockStatus = this.productItem.stock <= 10? "Low":this.productItem.stock<=20?"Average":"High";
-      // this.stockStatus = this.productItem.stock <= 10? "Low" : this.productItem.stock<=20? "Average":"High";
-      this.productItem.totalPrice = this.productItem.price*this.productItem.stock;
+      if( Number(this.inputDefaultValue) > 0 ){
+          this.productItem.stock = Number(this.inputDefaultValue);
+          this.productItem.totalPrice = this.productItem.price*this.productItem.stock;
+      }else{
+      }
+      
     }
   }
 
+  
   onClickDel(id){
     // console.log(id);
     this.productService.delProduct(id) ; 
   }
 
+  onShowProduct(id){
+    rou
+  }
 
 }
 

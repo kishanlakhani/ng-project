@@ -3,6 +3,8 @@
         [(ngModel)]="inputDefaultValue" 
         (input)="stockValueChange($event)"
         #stock="ngModel"
+        pattern="[0-9]+"
+
         required
         >
 <div class="alert alert-danger mt-2" 
@@ -12,14 +14,31 @@
 </div>  
 <div class="alert alert-danger mt-2" 
                    role="alert"
+                   *ngIf="stock.errors?.pattern&& !stock.pristine">
+                   stock is only number
+</div>
+<div class="alert alert-danger mt-2" 
+                   role="alert"
                    *ngIf="stock.errors?.min && !stock.pristine">
-                   stock is more the zero
+                   stock is more then one
 </div>
 <label class=" mt-2 text-dark" for="" [innerHTML]="stockStatus" [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }">
 </label>
+<br>
+<button 
+        class="btn-block mt-2 btn-primary"
+        [routerLink]="['edit']" routerLinkActive="router-link-active" 
+        [queryParams]="{id:productItem.id,title:productItem.title,price:productItem.price,stock:productItem.stock}"
+>Edit product</button>
 
 <button type="button" name="" id=""
-    class="btn-block btn-danger btn-lg mt-2" 
+    class="btn-block mt-2 btn-primary" 
+    (click)="onShowProduct(productItem.id)"
+    >
+    Show
+</button>
+<button type="button" name="" id=""
+    class="btn-block btn-danger mt-2" 
     (click)="onClickDel(productItem.id)"
     >
     Delete

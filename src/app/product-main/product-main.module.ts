@@ -8,6 +8,20 @@ import { ProductStockStatusComponent } from './product-stock-status/product-stoc
 import { ProductMainComponent } from './product-main.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductAddComponent } from './product-add/product-add.component';
+import { Routes, RouterModule } from '@angular/router';
+
+const router:Routes=[
+  { 
+    path:'',children:[
+      {
+        path:'add',component:ProductAddComponent
+      },
+      {
+        path:'edit',component:ProductAddComponent
+      }
+    ]
+  }
+]
 
 @NgModule({
   declarations: [
@@ -20,7 +34,8 @@ import { ProductAddComponent } from './product-add/product-add.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forChild(router)
   ],
 
   exports : [
