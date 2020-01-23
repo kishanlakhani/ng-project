@@ -14,8 +14,7 @@ const routes: Routes = [
   },
   {
     path:'product',component:ProductMainComponent
-  }
-  
+  }  
 ];
 
 @NgModule({

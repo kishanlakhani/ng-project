@@ -3,7 +3,7 @@ import { SignUpInService } from '../../services/user.service';
 import  { ISignIn } from '../../models/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { type } from 'os';
+// import { type } from 'os';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
