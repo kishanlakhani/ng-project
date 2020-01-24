@@ -3,7 +3,7 @@
         [(ngModel)]="inputDefaultValue" 
         (input)="stockValueChange($event)"
         #stock="ngModel"
-        pattern="[0-9]+"
+        pattern="^[1-9][0-9]+$"
 
         required
         >
@@ -14,8 +14,8 @@
 </div>  
 <div class="alert alert-danger mt-2" 
                    role="alert"
-                   *ngIf="stock.errors?.pattern&& !stock.pristine">
-                   stock is only number
+                   *ngIf="stock.errors?.pattern && !stock.pristine">
+                   please enter only number and number greater then zero
 </div>
 <div class="alert alert-danger mt-2" 
                    role="alert"
@@ -24,22 +24,4 @@
 </div>
 <label class=" mt-2 text-dark" for="" [innerHTML]="stockStatus" [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }">
 </label>
-<br>
-<button type="button" name="" id=""
-    class="btn-block btn-danger mt-2" 
-    (click)="onClickDel(productItem.id)"
-    >
-    Delete
-</button>
-<a 
-        class="btn-block mt-2 btn-primary"
-        [routerLink]="['edit']" routerLinkActive="router-link-active" 
-        [queryParams]="{id:productItem.id,title:productItem.title,price:productItem.price,stock:productItem.stock}"
->Edit product</a>
 
-<a type="button" name="" id=""
-    class="btn-block mt-2 btn-primary" 
-    (click)="onShowProduct(productItem.id)"
-    >
-    Show
-</a>

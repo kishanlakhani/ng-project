@@ -47,5 +47,10 @@ export class ProductService {
       console.log(this.id)
       this.productLists.splice(this.id,1);
   }
+
+
+  changeStock(){
+    
+  }
  
 }

@@ -14,6 +14,7 @@ export class ProductAddComponent implements OnInit {
   @Output() isAddProduct:EventEmitter<boolean> = new EventEmitter<boolean>();
   isAddProductInTabel:boolean = false;
   productObj:{id:number,title:string,price:number,stock:number}={id:0,title:'',price:0,stock:0};
+  productId:number=0;
   isUpdate:boolean=false;
   addProductForm:FormGroup = new FormGroup({
     'title':new FormControl(this.productObj.title,Validators.required),
@@ -21,29 +22,34 @@ export class ProductAddComponent implements OnInit {
     'stock':new FormControl(this.productObj.stock,[Validators.required,Validators.min(0)])
   });
 
+
   constructor(private productService:ProductService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.queryParamMap
-              // .filter(sub=>sub)
-              .subscribe(params=>{
-                console.log("in subscribe")
-                if(params.get('id')){
-                  this.productObj.id=Number(params.get("id"));
-                  this.productObj.title=params.get("title");
-                  this.productObj.price=Number(params.get("price"));
-                  this.productObj.stock=Number(params.get("stock"));
-                  this.isUpdate=true;
-                }  
-                // console.log(orderObj["title"])
-                
-              })
+    this.productId = Number(this.route.snapshot.params['id']) || 0; 
+    if(this.productId){
+      this.productObj = this.productService.getProductList().find(product=>product.id==this.productId);
+      this.isUpdate=true;
+    } 
+    // this.route.queryParamMap
+    //           // .filter(sub=>sub)
+    //           .subscribe(params=>{
+    //             console.log("in subscribe")
+    //             if(params.get('id')){
+    //               this.productObj.id=Number(params.get("id"));
+    //               this.productObj.title=params.get("title");
+    //               this.productObj.price=Number(params.get("price"));
+    //               this.productObj.stock=Number(params.get("stock"));
+    //               this.isUpdate=true;
+    //             }  
+    //             // console.log(orderObj["title"]) 
+  // })
 
-              this.addProductForm = new FormGroup({
-                'title':new FormControl(this.productObj.title,Validators.required),
-                'price':new FormControl(this.productObj.price,[Validators.required,Validators.min(0)]),
-                'stock':new FormControl(this.productObj.stock,[Validators.required,Validators.min(0)])
-              });
+    this.addProductForm = new FormGroup({
+      'title':new FormControl(this.productObj.title,Validators.required),
+      'price':new FormControl(this.productObj.price,[Validators.required,Validators.min(0)]),
+      'stock':new FormControl(this.productObj.stock,[Validators.required,Validators.min(0)])
+    });
             
   }
 

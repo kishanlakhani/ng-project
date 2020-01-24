@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter, SimpleChanges } from '@angular/core';
 import { IProductData } from '../../models/prouct.model';
 import { ProductService } from '../../services/product.service';
-import { SignInComponent } from 'src/app/signup-signin/sign-in/sign-in.component';
+// import { SignInComponent } from 'src/app/signup-signin/sign-in/sign-in.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,18 +11,21 @@ import { Router } from '@angular/router';
 })
 export class ProductStockStatusComponent implements OnInit {
 @Input() productItem:IProductData={id:0,title:"",price:0,stock:0};
-  regex=/[0-9]*/g;
+@Input()  stock:number=0;  
+regex=/[0-9]*/g;
   stockStatus:string = "high";
   stockValue:number=0;
   inputDefaultValue:string=""
+
   constructor(private  productService:ProductService,private router:Router) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.stockStatus = this.productItem.stock <= 10? "Low" : this.productItem.stock <= 20? "Average":"High";
-    console.log(this.stockStatus)
+    console.log("ngonchange")
+    this.stockStatus = this.stock <= 10? "Low" : this.stock <= 20? "Average":"High";
+    // console.log(this.stockStatus)
     this.inputDefaultValue = String(this.productItem.stock);
   }
 
@@ -32,12 +35,12 @@ export class ProductStockStatusComponent implements OnInit {
       if( Number(this.inputDefaultValue) > 0 ){
           this.productItem.stock = Number(this.inputDefaultValue);
           this.productItem.totalPrice = this.productItem.price*this.productItem.stock;
+          // this.ngOnChanges();
       }else{
       }
       
     }
   }
-
   
   onClickDel(id){
     // console.log(id);
@@ -45,7 +48,6 @@ export class ProductStockStatusComponent implements OnInit {
     console.log(a);
     if(a==true){
       this.productService.delProduct(id) ; 
-
     }
   }
 

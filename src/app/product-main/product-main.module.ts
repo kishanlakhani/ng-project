@@ -14,10 +14,13 @@ const router:Routes=[
   { 
     path:'product',component:ProductMainComponent,children:[
       {
+        path:'',component:ProductDetailComponent
+      },
+      {
         path:'add',component:ProductAddComponent
       },
       {
-        path:'edit',component:ProductAddComponent
+        path:'edit/:id',component:ProductAddComponent
       },
       {
         path:'show/:id',component:ProductShowComponent

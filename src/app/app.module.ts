@@ -21,8 +21,8 @@ import { ProductMainModule } from './product-main/product-main.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    SharedModule,
-    ProductMainModule
+    SharedModule
+    // ProductMainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -27,7 +27,6 @@ export class SignInComponent implements OnInit {
 
   checkMailValid(){
     return this.next()
-
   }
 
   next(){

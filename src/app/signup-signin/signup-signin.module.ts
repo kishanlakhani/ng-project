@@ -7,6 +7,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupSigninComponent } from './signup-signin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductMainModule } from '../product-main/product-main.module';
 
 const routes: Routes = [
   {
@@ -35,7 +36,7 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    // ProductMainModule,
+    ProductMainModule,
     RouterModule.forChild(routes)
 
   ],
