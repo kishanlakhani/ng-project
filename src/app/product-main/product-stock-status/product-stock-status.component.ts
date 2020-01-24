@@ -15,7 +15,7 @@ export class ProductStockStatusComponent implements OnInit {
   stockStatus:string = "high";
   stockValue:number=0;
   inputDefaultValue:string=""
-  constructor(private  productService:ProductService,router:Router) { }
+  constructor(private  productService:ProductService,private router:Router) { }
 
   ngOnInit() {
   }
@@ -41,11 +41,16 @@ export class ProductStockStatusComponent implements OnInit {
   
   onClickDel(id){
     // console.log(id);
-    this.productService.delProduct(id) ; 
+    let a =confirm("Are you sure?")
+    console.log(a);
+    if(a==true){
+      this.productService.delProduct(id) ; 
+
+    }
   }
 
   onShowProduct(id){
-    rou
+    this.router.navigate(['/product','show',id]);
   }
 
 }

@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title"> ID : {{ product.id }}</h5>
+      <h5 class="card-title"> Title : {{ product.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Price: {{ product.price }}</h6>
+      <p class="card-text">Stock: {{ product.stock }} </p>
+      <a href="#!" 
+            class="card-link btn btn-success"
+            [routerLink]="['/product']" routerLinkActive="router-link-active" 
+            >Go To Product-List</a> 
+        <!-- <a href="#!" 
+            class="card-link btn btn-success"
+            [routerLink]="['edit']" routerLinkActive="router-link-active" 
+            >Go To Product-List</a> -->
+    </div>
+  </div>

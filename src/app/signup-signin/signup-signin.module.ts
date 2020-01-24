@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductMainModule } from '../product-main/product-main.module'
+// import { ProductMainModule } from '../product-main/product-main.module'
 
-import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupSigninComponent } from './signup-signin.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RouterModule, Routes } from '@angular/router';
-import { from } from 'rxjs';
-import { ProductMainComponent } from '../product-main/product-main.component';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -22,15 +19,10 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path:'',redirectTo:'/auth/signin',pathMatch:'full'
   },
-
- {
-   path:'product',component:ProductMainComponent
- }
- 
+  { path:'',loadChildren:()=>import('../product-main/product-main.module').then(sub=>sub.ProductMainModule) }
 ];
 
 @NgModule({
@@ -43,7 +35,7 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ProductMainModule,
+    // ProductMainModule,
     RouterModule.forChild(routes)
 
   ],
