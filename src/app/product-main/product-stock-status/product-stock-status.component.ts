@@ -23,27 +23,28 @@ regex=/[0-9]*/g;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngonchange")
-    this.stockStatus = this.stock <= 10? "Low" : this.stock <= 20? "Average":"High";
-    // console.log(this.stockStatus)
+    // console.log(changes.currentValue)
+    // console.log(changes.previousValue)
+    // console.log( changes.currentValue )
+    // console.log( changes.previousValue )
+    // console.log("ngonchange")
+    this.stockStatus = this.stock <= 10? "Low" : this.stock <= 20? "Average":"High" || '';
     this.inputDefaultValue = String(this.productItem.stock);
   }
 
   stockValueChange(event){
-    console.log(this.inputDefaultValue)
+    // console.log(this.inputDefaultValue)
     if(!isNaN(Number(this.inputDefaultValue))){
       if( Number(this.inputDefaultValue) > 0 ){
           this.productItem.stock = Number(this.inputDefaultValue);
           this.productItem.totalPrice = this.productItem.price*this.productItem.stock;
-          // this.ngOnChanges();
-      }else{
       }
-      
+    }else{
+      // this.stockStatus = '';
     }
   }
   
   onClickDel(id){
-    // console.log(id);
     let a =confirm("Are you sure?")
     console.log(a);
     if(a==true){

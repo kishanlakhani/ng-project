@@ -11,7 +11,12 @@
         *ngIf="isAddProduct" 
         (isAddProduct)="isAddProductChange($event)">
 </app-product-add >
-<table class="table table-striped table-dark" *ngIf="productLists.length">
+<div
+style="overflow: scroll; height: 400px;" 
+>
+<table class="table table-striped table-dark" 
+ 
+*ngIf="productLists.length">
   <thead class="">
     <tr>
       <th scope="col">Id</th>
@@ -63,5 +68,8 @@
 
   </tbody>
 </table>
+</div
+>
+
 
 

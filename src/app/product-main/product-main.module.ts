@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Directive } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule , ReactiveFormsModule } from '@angular/forms'
 
@@ -9,6 +9,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductShowComponent } from './product-show/product-show.component';
+import { DirectiveModule } from '../directive/directive.module';
 
 const router:Routes=[
   { 
@@ -46,6 +47,7 @@ const router:Routes=[
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    DirectiveModule,
     RouterModule.forChild(router)
   ],
 

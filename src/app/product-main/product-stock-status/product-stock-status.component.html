@@ -3,8 +3,8 @@
         [(ngModel)]="inputDefaultValue" 
         (input)="stockValueChange($event)"
         #stock="ngModel"
-        pattern="^[1-9][0-9]+$"
-
+        pattern="^[1-9][0-9]+$g"
+        min="1"
         required
         >
 <div class="alert alert-danger mt-2" 
@@ -12,16 +12,22 @@
         *ngIf="stock.errors?.required && stock.touched">
       stock is required
 </div>  
-<div class="alert alert-danger mt-2" 
+<!-- <div class="alert alert-danger mt-2" 
                    role="alert"
                    *ngIf="stock.errors?.pattern && !stock.pristine">
                    please enter only number and number greater then zero
-</div>
-<div class="alert alert-danger mt-2" 
+</div> -->
+<!-- <div class="alert alert-danger mt-2" 
                    role="alert"
                    *ngIf="stock.errors?.min && !stock.pristine">
                    stock is more then one
-</div>
-<label class=" mt-2 text-dark" for="" [innerHTML]="stockStatus" [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }">
+</div> -->
+<label class=" mt-2 text-dark" 
+        *ngIf="!stock.errors?.required" 
+        [innerHTML]="stockStatus" 
+        [ngStyle]="{'background-color':productItem.stock<=10?'red' : productItem.stock>20?'green':'yellow' }"
+ > 
 </label>
+<p [appGread]="stock.value"></p>
+
 
