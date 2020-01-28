@@ -17,7 +17,7 @@ export class GreadDirective  {
     ngOnChanges(changes: SimpleChanges): void {
       //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
       //Add '${implements OnChanges}' to the class.
-      console.log(changes)
+      // console.log(changes)
 
       if(this.getStock == '' || isNaN(Number(this.getStock))){
         this.innerValue=''

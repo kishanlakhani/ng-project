@@ -11,15 +11,41 @@
         *ngIf="isAddProduct" 
         (isAddProduct)="isAddProductChange($event)">
 </app-product-add >
-<div
-style="overflow: scroll; height: 400px;" 
->
+
+<h1>selct for search option</h1>
+<select name="" id="" ngModel #selectValue="ngModel">
+  <option value="id">Search By Id</option>
+  <option value="title">Search By Title</option>
+  <option value="idTitle">Search By Id and Title</option>
+</select>
+
+<label for="">
+  Id:
+  <input type="checkbox" name="" id="">
+  
+</label>
+
+
+
+<div class="form-group">
+  <label for="">Search :</label>
+  <input type="text"
+    class="form-control" 
+    name="search" 
+    ngModel
+    #search="ngModel"
+    >
+    <p>{{search.value}}</p>
+</div>
+
+<div style="overflow: scroll; height: 400px;" >
+
 <table class="table table-striped table-dark" 
- 
-*ngIf="productLists.length">
+  *ngIf="productLists.length">
   <thead class="">
     <tr>
       <th scope="col">Id</th>
+      <th scope="col">Original Id</th>
       <th scope="col">Title</th>
       <th scope="col">Price</th>
       <th scope="col">Stock</th>
@@ -27,8 +53,10 @@ style="overflow: scroll; height: 400px;"
     </tr>
   </thead>
   <tbody class="">
-    <tr *ngFor="let product of productLists;let i=index">
+    <tr *ngFor="let product of productLists | filter : selectValue.value : search.value;let i=index">
       <th scope="row">{{ i+1 }}</th>
+      <td>{{ product.id}}</td>
+
       <td>{{ product.title}}</td>
       <td>{{ product.price}}</td>
       <td>{{product.stock}}</td>

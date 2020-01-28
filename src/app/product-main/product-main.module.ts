@@ -9,7 +9,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductShowComponent } from './product-show/product-show.component';
-import { DirectiveModule } from '../directive/directive.module';
+import { DirectiveModule  } from '../directive/directive.module';
+import { PipeModule } from '../pipe/pipe.module';
 
 const router:Routes=[
   { 
@@ -41,13 +42,14 @@ const router:Routes=[
     ProductEditComponent,
     ProductStockStatusComponent,
     ProductAddComponent,
-    ProductShowComponent
+    ProductShowComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     DirectiveModule,
+    PipeModule,
     RouterModule.forChild(router)
   ],
 
