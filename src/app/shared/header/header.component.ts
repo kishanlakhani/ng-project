@@ -8,8 +8,29 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor() { }
-
+  navs:{};
+  keys:string[]
+  selected:number;
   ngOnInit() {
+    this.navs={
+        'SignIn' : '/auth/signin' ,
+        'SignUp' : '/auth/signup' ,
+        'Product' : '/product' 
+      } 
+      this.keys=Object.keys(this.navs);
+
+    console.log(this.navs);
+    console.log(this.keys);
+  
   }
+  onCLick(i){
+    this.selected=i;
+  }
+  onClickA(){
+    this.selected=this.keys.length+1;
+  }
+
+
+
 
 }

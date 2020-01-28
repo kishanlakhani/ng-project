@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { SignUpInService } from '../../services/user.service';
+import { ISignUp, ISignIn } from 'src/app/models/user.model';
+import { SIGNUP, SIGNUPIN } from '../../mock-data/user-data'
+import { Router } from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +13,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 })
 export class SignUpComponent implements OnInit {
   signUpForm:FormGroup;
-  
+  signUpList:ISignUp[];
+  signInList:ISignIn[];
   Data: Array<{name:string,value:string}> = [
     { name: 'reading', value: 'Reading' },
     { name: 'sport', value: 'Sport' },
@@ -16,7 +22,8 @@ export class SignUpComponent implements OnInit {
     { name: 'singing', value: 'Singing' },
   ];
 
-  constructor() { }
+  constructor(private userService:SignUpInService,
+              private router:Router) { }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -28,11 +35,48 @@ export class SignUpComponent implements OnInit {
       'gender':new FormControl('male',[Validators.required]),
       'checkArray':new FormArray([],[Validators.required])
     });
-   
+    this.signUpList=this.userService.getSignUpList();
+   this.signInList=this.userService.getSignList();
   }
 
   onFormSubmit(){
-    console.log(this.signUpForm.value);
+   let isDupliteEmail = this.signUpForm.controls.email.value;
+    
+    if(this.userService.checkDuplicateEmail(isDupliteEmail)){
+      console.log("Email already taken")
+    }else{
+      this.signUpList.push({
+        username: this.signUpForm.controls.username.value,
+        password: this.signUpForm.controls.password.value,
+        cpassword: this.signUpForm.controls.cpassword.value,
+        birthdate: new Date(this.signUpForm.controls.birthdate.value).getTime(),
+        email: this.signUpForm.controls.email.value,
+        gender: this.signUpForm.controls.gender.value,
+        hobbies: this.signUpForm.controls.checkArray.value
+      });
+
+      this.signInList.push({
+        email:this.signUpForm.controls.email.value,
+        password:this.signUpForm.controls.password.value
+      })
+      
+      this.router.navigate(['/','auth','signin']);
+
+    }
+    console.log(SIGNUP)
+    console.log(SIGNUPIN)
+    console.log("--")
+    console.log(this.signInList);
+    console.log(this.signUpList)
+//     console.log({
+//       username: this.signUpForm.controls.username.value,
+// password: this.signUpForm.controls.password.value,
+// cpassword: this.signUpForm.controls.cpassword.value,
+// birthdate: new Date(this.signUpForm.controls.birthdate.value).getTime(),
+// email: this.signUpForm.controls.email.value,
+// gender: this.signUpForm.controls.gender.value,
+// checkArray: this.signUpForm.controls.checkArray.value
+//     });
   }
 
   onCheckChange(event) {

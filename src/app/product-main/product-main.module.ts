@@ -12,7 +12,7 @@ import { ProductShowComponent } from './product-show/product-show.component';
 
 const router:Routes=[
   { 
-    path:'product',component:ProductMainComponent,children:[
+    path:'',component:ProductMainComponent,children:[
       {
         path:'',component:ProductDetailComponent
       },
@@ -26,10 +26,11 @@ const router:Routes=[
         path:'show/:id',component:ProductShowComponent
       }
     ]
-  },
-  {
-    path:'',redirectTo:'/product',pathMatch:'full'
   }
+  // ,
+  // {
+  //   path:'',redirectTo:'/product',pathMatch:'full'
+  // }
 ]
 
 @NgModule({
@@ -49,7 +50,8 @@ const router:Routes=[
   ],
 
   exports : [
-    ProductMainComponent
+    ProductMainComponent,
+    RouterModule
   ]
 })
 export class ProductMainModule { }

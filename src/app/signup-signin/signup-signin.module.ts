@@ -11,19 +11,16 @@ import { ProductMainModule } from '../product-main/product-main.module';
 
 const routes: Routes = [
   {
-    path:'auth',children:[
+    path:'', children:[
       {
         path:'signup',component:SignUpComponent
       },
       {
         path:'signin',component:SignInComponent
-      }
+      },
+    
     ]
-  },
-  {
-    path:'',redirectTo:'/auth/signin',pathMatch:'full'
-  },
-  { path:'',loadChildren:()=>import('../product-main/product-main.module').then(sub=>sub.ProductMainModule) }
+  }
 ];
 
 @NgModule({
