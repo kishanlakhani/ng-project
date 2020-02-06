@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter, SimpleChanges } from '@angular/core';
-import { IProductData } from '../../models/prouct.model';
-import { ProductService } from '../../services/product.service';
-// import { SignInComponent } from 'src/app/signup-signin/sign-in/sign-in.component';
 import { Router } from '@angular/router';
+import { IProductData } from 'src/app/models/prouct.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product-stock-status',
@@ -23,11 +22,8 @@ regex=/[0-9]*/g;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    // console.log(changes.currentValue)
-    // console.log(changes.previousValue)
-    // console.log( changes.currentValue )
-    // console.log( changes.previousValue )
-    // console.log("ngonchange")
+  
+    console.log("ngonchange")
     this.stockStatus = this.stock <= 10? "Low" : this.stock <= 20? "Average":"High" || '';
     this.inputDefaultValue = String(this.productItem.stock);
   }

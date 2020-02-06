@@ -9,7 +9,16 @@ export class GreadDirective  {
   @HostBinding('style.backgroundColor') bgColor='';
   @HostBinding('style.color') color="black"
 
-
+//   @HostListener('load', ['$event']) onPageLoad(event: Event) {
+//     console.log('loaded');
+//     // this.onResize(event.target['innerWidth']);
+//  }
+  @HostListener('onLoad') abcd(){
+    console.log('call form gread');
+  }
+  ngOnInit(): void {
+    
+  }
   constructor(private el:ElementRef) { }
   // ngOnChanges(changes:SimpleChange) :void{ 
     // console.log(changes);

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProductData } from '../models/prouct.model';
-import { ProductService } from '../services/product.service';
-import { Router } from '@angular/router';
+import { SignUpInService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-product-main',
@@ -11,9 +9,16 @@ import { Router } from '@angular/router';
 export class ProductMainComponent implements OnInit {    
   
   title = 'input-output-assignment';
-  
+  constructor(
+    private userService:SignUpInService
+  ){}
   ngOnInit() {
   }
-
+  onLogOut(){
+    this.userService.logOut();
+    // function preventBack() {  }
+    setTimeout(()=>window.history.forward(), 0);
+    // window.onunload = function () { null };
+  }
 
 }

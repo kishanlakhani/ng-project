@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GreadDirective } from './gread.directive';
+import { DemoDirective } from './demo.directive';
 
 
 
 @NgModule({
   declarations: [
-    GreadDirective
+    GreadDirective,
+    DemoDirective
   ],
   imports: [
     CommonModule
   ]
   ,exports:[
-    GreadDirective
+    GreadDirective,
+    DemoDirective
   ]
 })
 export class DirectiveModule { }

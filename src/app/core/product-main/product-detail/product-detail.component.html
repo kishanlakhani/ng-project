@@ -13,22 +13,29 @@
 </app-product-add >
 
 <h1>selct for search option</h1>
-<select name="" id="" ngModel #selectValue="ngModel">
-  <option value="id">Search By Id</option>
+<select name="" (change)="onSelectChange(selectValue.value)"  ngModel #selectValue="ngModel">
+  <option value="" >Search By Id</option>
   <option value="title">Search By Title</option>
   <option value="idTitle">Search By Id and Title</option>
 </select>
 
-<label for="">
-  Id:
-  <input type="checkbox" name="" id="">
-  
-</label>
+<br>
 
+
+<fieldset>
+  <legend  >For Search</legend>
+  <input type="checkbox" name="search" (change)="onheckBoxChange($event)" value="id" id="">
+  <label for="">Id</label>
+  <br>
+  <input type="checkbox" name="search" (change)="onheckBoxChange($event)" value="title" id="">
+  <label for="music">Title</label>
+  
+</fieldset>
+<fieldset>
 
 
 <div class="form-group">
-  <label for="">Search :</label>
+  <label for="">Search : </label>
   <input type="text"
     class="form-control" 
     name="search" 
@@ -41,7 +48,7 @@
 <div style="overflow: scroll; height: 400px;" >
 
 <table class="table table-striped table-dark" 
-  *ngIf="productLists.length">
+  *ngIf="productLists">
   <thead class="">
     <tr>
       <th scope="col">Id</th>
@@ -53,7 +60,7 @@
     </tr>
   </thead>
   <tbody class="">
-    <tr *ngFor="let product of productLists | filter : selectValue.value : search.value;let i=index">
+    <tr *ngFor="let product of productLists | filter : searchArray : search.value;let i=index">
       <th scope="row">{{ i+1 }}</th>
       <td>{{ product.id}}</td>
 
@@ -70,11 +77,11 @@
     >
     Delete
 </button>
-<a 
-        class="btn-block mt-2 btn-primary"
-        [routerLink]="['edit',product.id]" routerLinkActive="router-link-active" 
-        
->Edit product</a>
+<button
+        (click)="onEditButtonClick(product)"
+        class="btn-block mt-2 btn-primary"        
+>Edit product</button
+>
 
 <!-- [queryParams]="{id:product.id,title:product.title,price:product.price,stock:product.stock}" -->
 <a type="button" name="" id=""
@@ -98,6 +105,9 @@
 </table>
 </div
 >
+<pagination [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize"></pagination>
+    
+
 
 
 

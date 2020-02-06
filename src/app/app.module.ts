@@ -5,28 +5,31 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
-// import { ProductMainComponent } from './product-main/product-main.component';
-// import { ProductMainModule } from './product-main/product-main.module';
-// import { GreadDirective } from './directive/gread.directive';
-// import { SignupSigninModule } from './signup-signin/signup-signin.module';
+import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { HomeComponent } from './core/home/home.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './product.intercept';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent ,
     HomeComponent,
-    // GreadDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule,
-    ReactiveFormsModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    TokenInterceptorService
+    ,{
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptorService, 
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 

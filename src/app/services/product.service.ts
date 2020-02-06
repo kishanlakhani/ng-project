@@ -1,56 +1,169 @@
 import { Injectable } from '@angular/core';
-import {PRODUCTLIST} from '../mock-data/product-data';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { JsonPipe } from '@angular/common';
 import { IProductData } from '../models/prouct.model';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  productLists:IProductData[] = PRODUCTLIST ;
-  i:number = 11;
-  id:number;
-  constructor() { }
 
-  getTotalPrice(){
-    this.productLists.map((producList)=>{
-      producList.totalPrice = producList.stock*producList.price;
+  productLists: IProductData[] = [];
+  i: number = 11;
+  id: number;
+  product:{}={
+    "title": "",
+    "price": null,
+    "stock": null,
+    "id": null
+    }
+  
+  dbUrl:string = 'http://localhost:3000/stock';
+
+  constructor(
+      private http: HttpClient
+    ) { }
+
+  getTotalPrice() {
+    this.productLists.map((producList) => {
+      producList.totalPrice = producList.stock * producList.price;
     })
   }
 
-  getProductList():IProductData[]{
-    this.getTotalPrice();
-    return this.productLists
-  }
-  
-  addProduct({title,price,stock}){
-    console.log({title,price,stock})
-    this.productLists.push({
-      id:this.i++,
-      title,
-      price,
-      stock
-    });
-    this.getProductList();
-  }
-
-  updateProduct({id,title,price,stock}){
-    this.id=this.productLists.findIndex(product=>product.id===id)
-    this.productLists[this.id].id=id;
-    this.productLists[this.id].title=title;
-    this.productLists[this.id].price=price;
-    this.productLists[this.id].stock=stock;
+  getProductList() {
+    return this.http.get<IProductData>(this.dbUrl)
+      .pipe(map((resData: IProductData) => {
+        let a = [];
+        for (let key in resData) {
+          a.push({ ...resData[key] })
+        }
+        a.map((producList) => {
+          producList.totalPrice = producList.stock * producList.price;
+        })
+        console.log(a);
+        return a;
+      }))
   }
 
-  delProduct(id1){
-
-      this.id = this.productLists.findIndex(product=>product.id===id1);
-      console.log(this.id)
-      this.productLists.splice(this.id,1);
+  getProductById(id) {
+    return this.http.get(this.dbUrl+'/' + id);
   }
 
-
-  changeStock(){
-    
+  addProduct(productObj) {
+    return this.http.post(this.dbUrl, productObj)  
   }
- 
+
+  delProduct(id1) {
+    return this.http.delete(this.dbUrl + id1);
+  }
+
+  updateProductById(id,productObj){
+    return this.http.put(this.dbUrl + '/'+id,productObj)
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // this.http.get<{[key:string]:IProductData[]}>('https://ng-project-73d97.firebaseio.com/posts.json')
+      // .pipe(map(res=>{
+        // let product = [];
+        // console.log(res);
+        // let key = Object.keys(res);
+        // console.log(key);
+        // product = res[key];
+      //   for(const key in res){
+      //     console.log({...res[key]})
+      //     product.push({...res[key]})
+      // }  
+      // console.log("product")
+      //   console.log(product);
+      //   return product
+      // }))
+      // .subscribe(data=>{
+      //   // return [{...data[Object.keys(data)]}]
+      //   console.log(data);
+      //   console.log(Object.keys(data));
+      //   // this.productLists = [];
+      //     console.log(this.productLists)
+
+      //   for(const key in data){
+      //     console.log("k")
+      //       this.productLists.push({...data[key]})
+      //   }       
+      // });
+
+
+
+ // this.http.get<{[key:string]:IProductData[]}>('https://ng-project-73d97.firebaseio.com/posts.json')
+      // .pipe(map(res=>{
+        // let product = [];
+        // console.log(res);
+        // let key = Object.keys(res);
+        // console.log(key);
+        // product = res[key];
+      //   for(const key in res){
+      //     console.log({...res[key]})
+      //     product.push({...res[key]})
+      // }  
+      // console.log("product")
+      //   console.log(product);
+      //   return product
+      // }))
+      // .subscribe(data=>{
+      //   // return [{...data[Object.keys(data)]}]
+      //   console.log(data);
+      //   console.log(Object.keys(data));
+      //   // this.productLists = [];
+      //     console.log(this.productLists)
+
+      //   for(const key in data){
+      //     console.log("k")
+      //       this.productLists.push({...data[key]})
+      // })
+
+
+
+
+
+
+        // this.productLists.push({
+    //   id:this.i++,
+    //   title,
+    //   price,
+    //   stock,
+    //    totalPrice: price*stock
+    // });
+
+
+
+
+    // this.id=this.productLists.findIndex(product=>product.id===id)
+    // const a:IProductData = {
+    //   id,
+    //   title,
+    //   price,
+    //   stock,
+    //   totalPrice:stock*price
+    // }

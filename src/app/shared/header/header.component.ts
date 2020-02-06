@@ -13,14 +13,13 @@ export class HeaderComponent implements OnInit {
   selected:number;
   ngOnInit() {
     this.navs={
-        'SignIn' : '/auth/signin' ,
-        'SignUp' : '/auth/signup' ,
+       'Auth':'/auth',
         'Product' : '/product' 
       } 
       this.keys=Object.keys(this.navs);
 
-    console.log(this.navs);
-    console.log(this.keys);
+    // console.log(this.navs);
+    // console.log(this.keys);
   
   }
   onCLick(i){
